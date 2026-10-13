@@ -18,11 +18,6 @@ class GroupResource
         DatabaseLogger $databaseLogger
     ) {
         $lang = $translationManager->user();
-
-        if (is_demo_group($groupId)) {
-            return new ApiResponse("demo_mode", $lang->t("demo_mode"), false);
-        }
-
         $name = $request->request->get("name");
         $permissions = $request->request->all("permissions");
 
@@ -43,10 +38,6 @@ class GroupResource
         DatabaseLogger $databaseLogger
     ) {
         $lang = $translationManager->user();
-
-        if (is_demo_group($groupId)) {
-            return new ApiResponse("demo_mode", $lang->t("demo_mode"), false);
-        }
 
         $deleted = $groupRepository->delete($groupId);
 

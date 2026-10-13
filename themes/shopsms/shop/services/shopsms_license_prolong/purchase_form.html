@@ -1,0 +1,60 @@
+<form id="form_purchase" class="shopsms_license_prolong_purchase">
+    <input type="password" class="is-hidden" />
+    <input type="hidden" name="service_id" value="{{ serviceId }}" />
+
+    <div class="columns is-multiline">
+        <div class="column is-half">
+            <div class="field">
+                <label for="identifier" class="label required">{{ __('identifier') }}</label>
+                <div class="control">
+                    <input
+                        type="text"
+                        id="identifier"
+                        name="identifier"
+                        value="{{ identifier }}"
+                        class="input"
+                        required
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-half">
+            <div class="field">
+                <label for="amount" class="label required">{{ __('license_prolong_time') }}</label>
+                <div class="control">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input
+                                type="number"
+                                id="amount"
+                                name="amount"
+                                min="0"
+                                class="input"
+                                required
+                            />
+                        </div>
+                        <div class="control">
+                            <a class="button is-static"> {{ serviceTag }} </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="help">{!! __('license_price') !!}</div>
+            </div>
+        </div>
+
+        <div id="cost" class="column is-full has-text-centered">
+            <sup class="currency">{{ settings.getCurrency() }}</sup>
+            <span class="price">0.00</span>
+        </div>
+    </div>
+
+    <div class="form-footer">
+        <button type="submit" class="button is-success">
+            <span class="icon">
+                <i class="fas fa-shopping-cart"></i>
+            </span>
+            <span>{{ __('go_to_payment') }}</span>
+        </button>
+    </div>
+</form>

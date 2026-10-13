@@ -2,7 +2,6 @@
 namespace Tests\Feature\Http\Api\Shop;
 
 use App\Repositories\UserRepository;
-use App\Support\Database;
 use Tests\Psr4\TestCases\HttpTestCase;
 
 class PasswordResourceTest extends HttpTestCase
@@ -13,12 +12,6 @@ class PasswordResourceTest extends HttpTestCase
     {
         parent::setUp();
         $this->userRepository = $this->app->make(UserRepository::class);
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        putenv("APP_SUBDOMAIN");
     }
 
     /** @test */
@@ -72,23 +65,5 @@ class PasswordResourceTest extends HttpTestCase
             ],
             $json["warnings"]
         );
-    }
-
-    /** @test */
-    public function can_change_password_in_demo_mode()
-    {
-        putenv("APP_SUBDOMAIN=demo");
-        $user = $this->factory->user(["password" => "prevpass"]);
-        $this->actingAs($user);
-
-        $response = $this->put("/api/password", [
-            "old_pass" => "prevpass",
-            "pass" => "abc123",
-            "pass_repeat" => "abc123",
-        ]);
-
-        $this->assertSame(200, $response->getStatusCode());
-        $json = $this->decodeJsonResponse($response);
-        $this->assertSame("password_changed", $json["return_id"]);
     }
 }

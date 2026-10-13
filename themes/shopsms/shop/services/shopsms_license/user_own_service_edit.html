@@ -1,0 +1,80 @@
+<b>{{ __('service') }}</b>: {{ serviceName }}<br />
+<b>{{ __('identifier') }}</b>: {{ identifier }}<br />
+<b>{{ __('expire') }}</b>: {{ expire }}<br />
+<hr />
+
+<div class="shopsms_user_edit">
+    <div class="columns is-multiline">
+        <div class="column is-full">
+            <div class="field">
+                <label for="email" class="label required">{{ __('email') }}</label>
+                <div class="control">
+                    <input type="email" id="email" name="email" class="input" value="{{ email }}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <div class="field">
+                <label class="label required">{{ __('platforms') }}</label>
+                <div class="control">
+                    <div class="buttons" name="platforms">
+                        <label class="button platform amxmodx fas" title="Counter Strike 1.6, etc.">
+                            <input type="checkbox" name="platforms[]" value="amxmodx"
+                            class="is-hidden" {!! platforms['amxmodx'] !!} />
+                            <span>AMX Mod X</span>
+                        </label>
+                        <label
+                            class="button platform sourcemod fas"
+                            title="Counter Strike: Global Offensive, Team Fortress 2, etc."
+                        >
+                            <input type="checkbox" name="platforms[]" value="sourcemod"
+                            class="is-hidden" {!! platforms['sourcemod'] !!} />
+                            <span>SOURCEMOD</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="help">{!! __('price_per_option', platformMonthlyPrice) !!}</div>
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <div class="field">
+                <label for="subdomain" class="label">{{ __('cloud') }}</label>
+                <div class="control">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input
+                                type="text"
+                                id="subdomain"
+                                name="subdomain"
+                                class="input has-text-right"
+                                value="{{ subdomain }}"
+                            />
+                        </div>
+                        <div class="control">
+                            <a class="button is-static">.sklep-sms.cloud</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="help">{{ __('subdomain_subtitle') }}</div>
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <div class="field">
+                <label class="label">{{ __('price_monthly') }}</label>
+                <div id="cost-monthly" class="control">{{ costMonthly }}</div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div id="cost" class="column is-full has-text-centered">
+        <sup class="currency">{{ settings.getCurrency() }}</sup>
+        <span class="price">0.00</span>
+    </div>
+</div>
+
+<input type="hidden" name="service_id" value="{{ serviceId }}" />
