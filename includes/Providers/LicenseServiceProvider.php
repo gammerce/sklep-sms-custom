@@ -1,0 +1,43 @@
+<?php
+namespace App\Providers;
+
+use App\Managers\ServiceModuleManager;
+use App\Requesting\Requester;
+use App\License\ServiceModules\ShopSmsLicense\LicenseServiceModule;
+use App\License\ServiceModules\ShopSmsLicenseEdit\LicenseEditServiceModule;
+use App\License\ServiceModules\ShopSmsLicenseProlong\LicenseProlongServiceModule;
+use App\License\LicenseServerService;
+use App\License\ProxyManagerClient;
+use App\System\Application;
+
+class LicenseServiceProvider
+{
+    public function register(Application $app)
+    {
+        $app->bind(LicenseServerService::class, function (Application $app) {
+            $url = "https://license.sklep-sms.pl";
+            $licenseSecret = getenv("LICENSE_SECRET");
+            return new LicenseServerService($url, $licenseSecret, $app->make(Requester::class));
+        });
+
+        $app->bind(ProxyManagerClient::class, function (Application $app) {
+            // In docker the manager lives in its own container (see compose),
+            // elsewhere it shares localhost with the shop.
+            $baseUrl = getenv("PROXY_MANAGER_URL") ?: "http://127.0.0.1:8080";
+            return new ProxyManagerClient($app->make(Requester::class), $baseUrl);
+        });
+
+        $app->extend(ServiceModuleManager::class, function (
+            ServiceModuleManager $serviceModuleManager
+        ) {
+            $serviceModuleManager->register(LicenseServiceModule::class, "Sklep-SMS license");
+            $serviceModuleManager->register(LicenseEditServiceModule::class, "License edition");
+            $serviceModuleManager->register(
+                LicenseProlongServiceModule::class,
+                "License extension"
+            );
+
+            return $serviceModuleManager;
+        });
+    }
+}

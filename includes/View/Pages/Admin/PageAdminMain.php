@@ -237,6 +237,17 @@ class PageAdminMain extends PageAdmin
                 $this->lang->t("note_whole_income", $wholeIncomeText),
                 $this->url->to("/admin/income")
             );
+
+            // Daily
+            $incomeDailyText = $this->priceTextService->getPriceText(
+                app()
+                    ->make(\App\License\LicenseIncomeService::class)
+                    ->sumDaily()
+            );
+            $bricks[] = $this->createBrick(
+                "Dzienny dochód sklepu wynosi <strong>{$incomeDailyText}</strong>.",
+                $this->url->to("/admin/income")
+            );
         }
 
         return implode("", $bricks);

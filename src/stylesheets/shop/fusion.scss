@@ -51,6 +51,8 @@ $button-static-color: $scheme-invert;
 @import "src/stylesheets/general/partials/helpers";
 @import "src/stylesheets/general/partials/window_info";
 
+@import "src/stylesheets/shop/services/shopsms_license";
+
 // Layout
 
 html,
@@ -70,7 +72,10 @@ body {
 }
 
 .site-content {
-    background: url("../../images/background.jpg") no-repeat fixed;
+    background-image: url("../../images/abstract-fluid.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     min-height: calc(100vh - #{$navbar-height});
     padding-bottom: 5rem;
 }

@@ -1,0 +1,68 @@
+$amxmodx-color: #024079;
+$sourcemod-color: #f69e1d;
+
+.shopsms_license_purchase,
+.shopsms_user_edit {
+    .platform {
+        color: $white;
+        border: none;
+
+        &.amxmodx {
+            background: rgba($amxmodx-color, 0.8);
+
+            &:hover {
+                background: $amxmodx-color;
+            }
+
+            &.is-active {
+                background: $amxmodx-color;
+            }
+        }
+
+        &.sourcemod {
+            background: rgba($sourcemod-color, 0.8);
+
+            &:hover {
+                background: $sourcemod-color;
+            }
+
+            &.is-active {
+                background: $sourcemod-color;
+            }
+        }
+
+        [type="checkbox"]:checked + span:after {
+            content: "\f00c";
+            margin-left: 0.5rem;
+            color: $success;
+        }
+    }
+}
+
+.button {
+    &.regenerate-token {
+        background: #b71c1c;
+    }
+
+    &.prolong-license {
+        background: #5b9931;
+    }
+}
+
+#cost {
+    margin-top: 1rem;
+    font-size: $size-3;
+    font-weight: $weight-bold;
+
+    .currency {
+        font-size: $size-6;
+        font-weight: $weight-normal;
+    }
+
+    .reload {
+        color: $primary;
+        cursor: pointer;
+        font-size: $size-6;
+        font-weight: $weight-normal;
+    }
+}
