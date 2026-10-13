@@ -13,8 +13,9 @@ merging `upstream/master` (configure the `upstream` remote once pointing at
 - License storefront/theme/i18n: `src/js/shop/pages/{purchase/shopsms_license{,_prolong},user_own_services/shopsms_license}.ts`,
   `src/images/{abstract-fluid,tick,reload}.{jpg,png}`, `src/stylesheets/shop/services/`,
   `themes/shopsms/`, `themes/fusion/shop/pages/{privacy_policy,profile,register}.html`,
-  `translations/*/{admin/general,charge_wallet,user/general}.php` (license strings),
-  `translations/*/{shopsms_license.php}`, `tests/Unit/License/`, `HOWTO.md`
+  `translations/*/{shopsms_license.php}` (the only translation-layer custom
+  content; the shared language files stay identical to upstream),
+  `tests/Unit/License/`, `HOWTO.md`
 - Store wiring: `includes/System/Application.php` (License provider
   registration), `includes/View/Pages/Admin/PageAdminMain.php` (license
   income brick), `confidential/.env.example` (`LICENSE_SECRET`), and the
